@@ -1,0 +1,31 @@
+@import "tailwindcss";
+
+@theme {
+  --color-cream: #fbf9f4;
+  --color-ink: #111110;
+  --color-ink-muted: #2a2520;
+  --color-ink-tertiary: #7a6f5c;
+  --color-rule: #d8d0bd;
+  --color-rule-soft: #e3dccb;
+  --color-paper: #f3eee2;
+  --color-accent: #a04a2a;
+
+  --font-serif: var(--font-source-serif), Georgia, serif;
+  --font-mono: var(--font-jetbrains-mono), ui-monospace, monospace;
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+}
+
+html, body {
+  background: transparent;
+  color: var(--color-ink);
+  font-family: var(--font-serif);
+  -webkit-font-smoothing: antialiased;
+  cursor: url('/assets/cursor-arrow-24.png') 2 2, default;
+}
+
+a, button, [role="button"], summary, [type="button"], [type="submit"], label[for] {
+  cursor: url('/assets/cursor-arrow-24.png') 2 2, pointer;
+}
+
+a { color: inherit; }
+a:hover { color: var(--color-accent); }
