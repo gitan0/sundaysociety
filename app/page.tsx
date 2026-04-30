@@ -106,7 +106,7 @@ export default function Page() {
                   Luke Woodhatch
                 </h1>
                 <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-ink-tertiary mt-1">
-                  @sundaysociety · Tulum / Online
+                  Tulum / Online
                 </p>
               </div>
             </div>
