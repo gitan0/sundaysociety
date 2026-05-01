@@ -43,7 +43,7 @@ export default function RootLayout({
         {/* Wallpaper — lifted from page.tsx so 404 also gets it */}
         <div className="fixed inset-0 -z-10">
           <Image
-            src="/wallpaper.webp"
+            src="/ssbg.webp"
             alt=""
             fill
             priority
