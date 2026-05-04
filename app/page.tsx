@@ -4,6 +4,7 @@ import { MusicWindow } from "@/components/MusicWindow";
 import { ChessWindow } from "@/components/ChessWindow";
 import { CompanyRow, type Company } from "@/components/CompanyRow";
 import { Menubar } from "@/components/Menubar";
+import { DesktopIcon } from "@/components/DesktopIcon";
 
 const companies: Company[] = [
   {
@@ -103,6 +104,15 @@ export default function Page() {
   return (
     <main className="relative min-h-screen w-full overflow-x-hidden pt-7">
       <Menubar />
+
+      <div className="hidden lg:flex absolute top-10 left-6 z-30 flex-col gap-4">
+        <DesktopIcon
+          href="https://ats.fyi"
+          label="ats.fyi"
+          src="/assets/ats-fyi.svg"
+          alt="ats.fyi"
+        />
+      </div>
 
       {/* Window grid — centered cluster */}
       <div className="relative min-h-screen flex flex-col items-center justify-center max-w-[980px] mx-auto px-4 sm:px-8 py-10 lg:py-16">
