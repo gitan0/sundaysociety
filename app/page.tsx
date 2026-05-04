@@ -47,6 +47,24 @@ const projects: {
   body: React.ReactNode;
 }[] = [
   {
+    name: "ats.fyi",
+    meta: "Job board · live",
+    body: (
+      <>
+        A job board that scrapes Ashby, Lever, and Greenhouse APIs to surface startup roles in a clean, filterable feed. Filter by role, industry, salary, VC backer, and location across 200+ tech companies.{" "}
+        <a
+          href="https://ats.fyi"
+          target="_blank"
+          rel="noreferrer"
+          className="underline-offset-4 hover:underline text-accent"
+        >
+          ats.fyi
+        </a>
+        .
+      </>
+    ),
+  },
+  {
     name: "Pixietiers",
     meta: "Onchain data · live",
     body: (
@@ -139,7 +157,7 @@ export default function Page() {
 
           </Window>
 
-            <Window title="currently">
+            <Window title="side projects">
               <div className="divide-y divide-rule">
                 {projects.map((p) => (
                   <div key={p.name} className="py-4 first:pt-0 last:pb-0">
