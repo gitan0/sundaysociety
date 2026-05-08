@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import { Source_Serif_4, JetBrains_Mono, Inter } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 
 const sourceSerif = Source_Serif_4({
@@ -52,6 +53,7 @@ export default function RootLayout({
           />
         </div>
         {children}
+        <Analytics />
       </body>
     </html>
   );
