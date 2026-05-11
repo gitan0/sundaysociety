@@ -65,34 +65,6 @@ const projects: {
       </>
     ),
   },
-  {
-    name: "Pixietiers",
-    meta: "Onchain data · live",
-    body: (
-      <>
-        Onchain stats and tier lists, powered by Dune.{" "}
-        <a
-          href="https://pixietiers.com"
-          target="_blank"
-          rel="noreferrer"
-          className="underline-offset-4 hover:underline text-accent"
-        >
-          pixietiers.com
-        </a>
-        .
-      </>
-    ),
-  },
-  {
-    name: "Touchline",
-    meta: "Chrome extension · in progress",
-    body: "Overlays FPL analytics on the official Fantasy Premier League site. Built to replace the four tabs I opened every gameweek.",
-  },
-  {
-    name: "Untitled",
-    meta: "RTS game · early",
-    body: "An RTS where the players are LLMs writing YAML scripts. 24/7 battles, no humans.",
-  },
 ];
 
 const links = [
