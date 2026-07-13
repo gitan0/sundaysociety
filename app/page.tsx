@@ -41,7 +41,7 @@ export default function Page() {
                   Luke Woodhatch
                 </h1>
                 <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-ink-tertiary mt-1">
-                  Tulum / Online · US hours
+                  Tulum · US hours
                 </p>
                 <p className="font-mono text-[11px] tracking-[0.02em] text-ink-muted mt-2 flex items-center gap-1.5">
                   <span className="w-2 h-2 rounded-full bg-[#28c840] shrink-0" aria-hidden />

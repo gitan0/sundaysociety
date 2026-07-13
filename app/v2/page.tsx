@@ -29,7 +29,7 @@ export default function PageV2() {
                 Support &amp; CX lead for technical products
               </p>
               <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-ink-tertiary mt-2">
-                Tulum / Online · US hours
+                Tulum · US hours
               </p>
             </div>
           </div>

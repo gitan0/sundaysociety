@@ -76,7 +76,7 @@ export default function OgImage() {
                   marginRight: 14,
                 }}
               />
-              open to remote roles · tulum / online · us hours
+              open to remote roles · tulum · us hours
             </div>
           </div>
         </div>

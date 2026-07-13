@@ -22,7 +22,7 @@ export const companies: Company[] = [
     dates: "Mar 2023 — May 2025",
     logo: "/logos/slingshot.jpeg",
     oneLiner:
-      "Tier 3 escalations, onchain investigations, and security incident response for a multi-chain trading app.",
+      "Tier 3 escalations, security incident response, and KOL/trader acquisition — cold outreach through personal onboarding — for a multi-chain trading app.",
     note: "Acquired by Magic Eden",
   },
   {
@@ -32,7 +32,6 @@ export const companies: Company[] = [
     logo: "/logos/pavlok.png",
     oneLiner:
       "Solo IC to a 24/7 team of 6 at 95%+ CSAT — thousands of tickets a week, response times cut from hours to under 30 minutes.",
-    note: "Built it to run itself — led the team alongside Slingshot from 2023",
   },
   {
     name: "Casa Selva",
@@ -40,7 +39,7 @@ export const companies: Company[] = [
     dates: "Jul 2017 — Mar 2022",
     logo: "/logos/casa-selva.png",
     oneLiner:
-      "Grew a D2C skincare brand from zero to Sephora Mexico. Featured in Vogue and Harper's Bazaar.",
+      "Grew a D2C skincare brand from zero to Sephora Mexico — content strategy, ambassador program, press in Vogue and Harper's Bazaar.",
   },
 ];
 
