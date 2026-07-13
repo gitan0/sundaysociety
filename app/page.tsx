@@ -2,75 +2,10 @@ import Image from "next/image";
 import { Window } from "@/components/Window";
 import { MusicWindow } from "@/components/MusicWindow";
 import { ChessWindow } from "@/components/ChessWindow";
-import { CompanyRow, type Company } from "@/components/CompanyRow";
+import { CompanyRow } from "@/components/CompanyRow";
 import { Menubar } from "@/components/Menubar";
 import { DesktopIcon } from "@/components/DesktopIcon";
-
-const companies: Company[] = [
-  {
-    name: "Pavlok",
-    title: "Head of Customer Support",
-    dates: "Jul 2016 — Sep 2023",
-    logo: "/logos/pavlok.png",
-    oneLiner:
-      "Built support from solo IC to a team of 6 running 24/7 at 95%+ CSAT.",
-  },
-  {
-    name: "Slingshot",
-    title: "Community Manager",
-    dates: "Mar 2023 — May 2025",
-    logo: "/logos/slingshot.jpeg",
-    oneLiner:
-      "Tier 3 escalation and community ops for a multi-chain trading app.",
-    note: "Acquired by Magic Eden",
-  },
-  {
-    name: "Magic Eden",
-    title: "BD Manager",
-    dates: "May 2025 — Nov 2025",
-    logo: "/logos/magic-eden.png",
-    oneLiner:
-      "Owned escalations and user migration during the Slingshot acquisition.",
-  },
-  {
-    name: "Casa Selva",
-    title: "Co-Founder",
-    dates: "Jul 2017 — Mar 2022",
-    logo: "/logos/casa-selva.png",
-    oneLiner:
-      "Co-founded a D2C skincare brand in Tulum. Featured in Vogue and Harper's Bazaar.",
-  },
-];
-
-const projects: {
-  name: string;
-  meta: string;
-  body: React.ReactNode;
-}[] = [
-  {
-    name: "ats.fyi",
-    meta: "Job board · live",
-    body: (
-      <>
-        A job board that scrapes Ashby, Lever, and Greenhouse APIs to surface startup roles in a clean, filterable feed. Filter by role, industry, salary, VC backer, and location across 200+ tech companies.{" "}
-        <a
-          href="https://ats.fyi"
-          target="_blank"
-          rel="noreferrer"
-          className="underline-offset-4 hover:underline text-accent"
-        >
-          ats.fyi
-        </a>
-        .
-      </>
-    ),
-  },
-];
-
-const links = [
-  { label: "linkedin", href: "https://linkedin.com/in/lukewoodhatch" },
-  { label: "email", href: "mailto:luke@sundaysociety.xyz" },
-];
+import { availability, bio, companies, links, projects } from "@/lib/content";
 
 export default function Page() {
   return (
@@ -89,7 +24,7 @@ export default function Page() {
       {/* Window grid — centered cluster */}
       <div className="relative min-h-screen flex flex-col items-center justify-center max-w-[980px] mx-auto px-4 sm:px-8 py-10 lg:py-16">
         <div className="flex flex-col lg:flex-row gap-6 lg:gap-8 items-start justify-center">
-          {/* Left column: main + currently */}
+          {/* Left column: main + side projects */}
           <div className="w-full lg:w-[640px] space-y-6">
           <Window title="sundaysociety.xyz">
             <div className="flex items-start gap-4">
@@ -106,18 +41,23 @@ export default function Page() {
                   Luke Woodhatch
                 </h1>
                 <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-ink-tertiary mt-1">
-                  Tulum / Online
+                  Tulum / Online · US hours
+                </p>
+                <p className="font-mono text-[11px] tracking-[0.02em] text-ink-muted mt-2 flex items-center gap-1.5">
+                  <span className="w-2 h-2 rounded-full bg-[#28c840] shrink-0" aria-hidden />
+                  {availability}
                 </p>
               </div>
             </div>
 
             <p className="font-serif text-base text-ink mt-5 leading-relaxed">
-              Support and ops at startups for eight years. Crypto, hardware,
-              a skincare brand along the way. Always building something with
-              AI on the side.
+              {bio}
             </p>
 
             <div className="mt-4 flex flex-wrap gap-x-5 gap-y-1 font-mono text-sm">
+              <a href="/resume.pdf" className="hover:underline underline-offset-4">
+                resume <span aria-hidden>↗</span>
+              </a>
               <a href="mailto:luke@sundaysociety.xyz" className="hover:underline underline-offset-4">
                 email <span aria-hidden>↗</span>
               </a>

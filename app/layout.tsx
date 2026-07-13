@@ -22,9 +22,25 @@ const inter = Inter({
   display: "swap",
 });
 
+const siteDescription =
+  "Support & CX lead — 8 years building 24/7 support orgs for hardware and crypto startups. Tier 3 escalations, incident response, AI-augmented workflows. Open to remote roles.";
+
 export const metadata: Metadata = {
-  title: "Luke Woodhatch — sundaysociety",
-  description: "Support and ops for AI and crypto startups.",
+  metadataBase: new URL("https://sundaysociety.xyz"),
+  title: "Luke Woodhatch — Support & CX Lead · AI + Crypto",
+  description: siteDescription,
+  openGraph: {
+    title: "Luke Woodhatch — Support & CX Lead · AI + Crypto",
+    description: siteDescription,
+    url: "https://sundaysociety.xyz",
+    siteName: "sundaysociety",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Luke Woodhatch — Support & CX Lead · AI + Crypto",
+    description: siteDescription,
+  },
   icons: {
     icon: [
       { url: "/assets/favicon.svg", media: "(prefers-color-scheme: light)" },
