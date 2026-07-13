@@ -74,17 +74,6 @@ export const projects: Project[] = [
       </>
     ),
   },
-  {
-    name: "sundaysociety.xyz",
-    meta: "This site · hand-built",
-    body: (
-      <>
-        Designed and built from scratch — Next.js 15, Tailwind v4, a live
-        Spotify feed, and a playable chess bot. Built with AI in the loop end
-        to end.
-      </>
-    ),
-  },
 ];
 
 export const links = [
