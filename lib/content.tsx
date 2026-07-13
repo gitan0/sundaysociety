@@ -46,6 +46,7 @@ export const companies: Company[] = [
 export type Project = {
   name: string;
   meta: string;
+  href?: string;
   body: React.ReactNode;
 };
 
@@ -53,20 +54,12 @@ export const projects: Project[] = [
   {
     name: "ats.fyi",
     meta: "Job board · live",
+    href: "https://ats.fyi",
     body: (
       <>
         A job board that scrapes Ashby, Lever, and Greenhouse APIs to surface
         startup roles in a clean, filterable feed — role, industry, salary, VC
-        backer, and location across 200+ tech companies.{" "}
-        <a
-          href="https://ats.fyi"
-          target="_blank"
-          rel="noreferrer"
-          className="underline-offset-4 hover:underline text-accent"
-        >
-          ats.fyi
-        </a>
-        .
+        backer, and location across 200+ tech companies.
       </>
     ),
   },
@@ -98,5 +91,4 @@ export const links = [
   { label: "resume", href: "/resume.pdf" },
   { label: "linkedin", href: "https://linkedin.com/in/lukewoodhatch" },
   { label: "email", href: "mailto:luke@sundaysociety.xyz" },
-  { label: "ats.fyi", href: "https://ats.fyi" },
 ];

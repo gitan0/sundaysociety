@@ -83,7 +83,20 @@ export default function Page() {
               <div className="divide-y divide-rule">
                 {projects.map((p) => (
                   <div key={p.name} className="py-4 first:pt-0 last:pb-0">
-                    <h3 className="font-serif text-base">{p.name}</h3>
+                    <h3 className="font-serif text-base">
+                      {p.href ? (
+                        <a
+                          href={p.href}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="hover:underline underline-offset-4"
+                        >
+                          {p.name} <span aria-hidden>↗</span>
+                        </a>
+                      ) : (
+                        p.name
+                      )}
+                    </h3>
                     <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-ink-tertiary mt-1">
                       {p.meta}
                     </p>
