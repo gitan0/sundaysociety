@@ -2,10 +2,10 @@ import { type Company } from "@/components/CompanyRow";
 
 // Shared copy for both page variants — edit here, both update.
 
-export const availability = "open to remote roles — support & cx · ai + crypto";
+export const availability = "open to remote roles — support & community ops · crypto + ai";
 
 export const bio =
-  "Eight years building support teams from scratch across hardware and crypto — Tier 3 escalations, security incidents, and the automations that keep CSAT above 95%. Co-founded a skincare brand that landed in Sephora. Currently on sabbatical, building with AI daily.";
+  "Eight years building support teams from scratch across hardware and crypto — Tier 3 escalations, security incidents, and the automations that keep CSAT above 95%. Trading onchain since 2017; co-founded a skincare brand that landed in Sephora. Currently on sabbatical, building with AI daily.";
 
 export const companies: Company[] = [
   {
@@ -67,6 +67,17 @@ export const projects: Project[] = [
           ats.fyi
         </a>
         .
+      </>
+    ),
+  },
+  {
+    name: "Touchline",
+    meta: "Chrome extension · in progress",
+    body: (
+      <>
+        A Chrome extension that overlays Fantasy Premier League analytics on
+        the official site — built to replace the four tabs I&apos;d open every
+        gameweek.
       </>
     ),
   },

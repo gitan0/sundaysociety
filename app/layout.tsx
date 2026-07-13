@@ -23,14 +23,14 @@ const inter = Inter({
 });
 
 const siteDescription =
-  "Support & CX lead — 8 years building 24/7 support orgs for hardware and crypto startups. Tier 3 escalations, incident response, AI-augmented workflows. Open to remote roles.";
+  "Support & community ops, crypto-native — 8+ years building 24/7 support orgs for hardware and crypto startups. Tier 3 escalations, incident response, AI-augmented workflows. Open to remote roles.";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://sundaysociety.xyz"),
-  title: "Luke Woodhatch — Support & CX Lead · AI + Crypto",
+  title: "Luke Woodhatch — Support & Community Ops · Crypto-native",
   description: siteDescription,
   openGraph: {
-    title: "Luke Woodhatch — Support & CX Lead · AI + Crypto",
+    title: "Luke Woodhatch — Support & Community Ops · Crypto-native",
     description: siteDescription,
     url: "https://sundaysociety.xyz",
     siteName: "sundaysociety",
@@ -38,7 +38,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Luke Woodhatch — Support & CX Lead · AI + Crypto",
+    title: "Luke Woodhatch — Support & Community Ops · Crypto-native",
     description: siteDescription,
   },
   icons: {

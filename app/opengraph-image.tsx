@@ -1,6 +1,6 @@
 import { ImageResponse } from "next/og";
 
-export const alt = "Luke Woodhatch — Support & CX Lead · AI + Crypto";
+export const alt = "Luke Woodhatch — Support & Community Ops · Crypto-native";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -64,7 +64,7 @@ export default function OgImage() {
               Luke Woodhatch
             </div>
             <div style={{ fontSize: 32, color: "#2a2520", marginTop: 16 }}>
-              Support &amp; CX Lead · AI + Crypto
+              Support &amp; Community Ops · Crypto-native
             </div>
             <div style={{ display: "flex", alignItems: "center", marginTop: 36, fontSize: 24, color: "#7a6f5c" }}>
               <div
