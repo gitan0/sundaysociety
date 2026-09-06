@@ -27,5 +27,108 @@ a, button, [role="button"], summary, [type="button"], [type="submit"], label[for
   cursor: url('/assets/cursor-arrow-24.png') 2 2, pointer;
 }
 
-a { color: inherit; }
-a:hover { color: var(--color-accent); }
+@layer base {
+  a { color: inherit; }
+  a:hover { color: var(--color-accent); }
+}
+
+/* --- desktop v2 --- */
+
+/* Window drag offsets apply on desktop only; saved offsets must not shift mobile layout */
+[data-win] {
+  --wx: 0px;
+  --wy: 0px;
+}
+@media (min-width: 1024px) {
+  [data-win="flow"] {
+    transform: translate(var(--wx), var(--wy));
+  }
+  [data-win="floating"] {
+    transform: translate(
+      calc(-50% + var(--wx) + var(--cascade, 0px)),
+      calc(var(--wy) + var(--cascade, 0px))
+    );
+  }
+}
+
+/* Window open animation */
+@keyframes win-in {
+  from {
+    opacity: 0;
+    scale: 0.97;
+  }
+  to {
+    opacity: 1;
+    scale: 1;
+  }
+}
+.win-enter > div {
+  animation: win-in 180ms ease-out;
+}
+
+/* Dock */
+.dock-item:hover .dock-label,
+.dock-item:focus-within .dock-label {
+  opacity: 1;
+}
+.dock-dot {
+  transition: opacity 200ms ease;
+}
+
+/* Now-playing equalizer */
+.eq {
+  display: inline-flex;
+  align-items: flex-end;
+  gap: 2px;
+  height: 10px;
+}
+.eq i {
+  width: 2.5px;
+  background: var(--color-accent);
+  animation: eq-bounce 900ms ease-in-out infinite;
+}
+.eq i:nth-child(1) {
+  height: 60%;
+  animation-delay: 0ms;
+}
+.eq i:nth-child(2) {
+  height: 100%;
+  animation-delay: 150ms;
+}
+.eq i:nth-child(3) {
+  height: 75%;
+  animation-delay: 300ms;
+}
+@keyframes eq-bounce {
+  0%,
+  100% {
+    transform: scaleY(0.5);
+  }
+  50% {
+    transform: scaleY(1);
+  }
+}
+
+/* Focus visibility */
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* Reduced motion: kill animation, keep function */
+@media (prefers-reduced-motion: reduce) {
+  .win-enter > div {
+    animation: none;
+  }
+  .eq i {
+    animation: none;
+  }
+  .dock-item {
+    transform: none !important;
+    transition: none !important;
+  }
+  * {
+    scroll-behavior: auto !important;
+  }
+}

@@ -1,11 +1,26 @@
 import { ImageResponse } from "next/og";
+import { caseStudies } from "@/lib/content";
 
-export const alt = "Luke Woodhatch — Support & CX Lead · AI + Crypto";
+export const alt = "Case study — Luke Woodhatch";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
-// Cream macOS window on a dark backdrop — mirrors the site's desktop aesthetic.
-export default function OgImage() {
+export function generateStaticParams() {
+  return caseStudies.map((cs) => ({ slug: cs.slug }));
+}
+
+export default async function OgImage({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
+  const { slug } = await params;
+  const cs = caseStudies.find((c) => c.slug === slug);
+  const company = cs?.company ?? "Case study";
+  const hook = cs?.hook ?? "";
+  const dates = cs?.dates ?? "";
+  const stat = cs?.numbers[0];
+
   return new ImageResponse(
     (
       <div
@@ -56,27 +71,30 @@ export default function OgImage() {
                 color: "#7a6f5c",
               }}
             >
-              sundaysociety.xyz
+              {`${slug}.md — sundaysociety.xyz`}
             </div>
           </div>
           <div style={{ display: "flex", flexDirection: "column", padding: "48px 56px 56px" }}>
-            <div style={{ fontSize: 64, color: "#111110", fontWeight: 700 }}>
-              Luke Woodhatch
+            <div style={{ fontSize: 28, color: "#7a6f5c" }}>
+              {`${company} · ${dates}`}
             </div>
-            <div style={{ fontSize: 32, color: "#2a2520", marginTop: 16 }}>
-              I build and run support orgs for AI and crypto companies.
+            <div style={{ fontSize: 56, color: "#111110", fontWeight: 700, marginTop: 14, lineHeight: 1.1 }}>
+              {hook}
             </div>
-            <div style={{ display: "flex", alignItems: "center", marginTop: 36, fontSize: 24, color: "#7a6f5c" }}>
+            <div style={{ display: "flex", alignItems: "center", marginTop: 36, fontSize: 26, color: "#2a2520" }}>
+              {stat ? `${stat.value} — ${stat.label}` : ""}
+            </div>
+            <div style={{ display: "flex", alignItems: "center", marginTop: 24, fontSize: 22, color: "#7a6f5c" }}>
               <div
                 style={{
-                  width: 16,
-                  height: 16,
-                  borderRadius: 8,
+                  width: 14,
+                  height: 14,
+                  borderRadius: 7,
                   background: "#28c840",
-                  marginRight: 14,
+                  marginRight: 12,
                 }}
               />
-              open to support / cx lead roles · tulum · us hours
+              luke woodhatch · open to support / cx lead roles
             </div>
           </div>
         </div>

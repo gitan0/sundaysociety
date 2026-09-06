@@ -53,7 +53,15 @@ export function Menubar() {
       </div>
 
       <div className="ml-auto flex items-center gap-3.5">
-        <span className="hidden sm:inline">○ ●</span>
+        <button
+          type="button"
+          aria-label="Open search"
+          onClick={() => window.dispatchEvent(new Event("ss:spotlight"))}
+          className="flex items-center gap-1.5 hover:text-ink transition-colors"
+        >
+          <span className="text-[13px] leading-none" aria-hidden>⌕</span>
+          <span className="hidden sm:inline">⌘K</span>
+        </button>
         <span className="hidden sm:inline">tulum · 27°c</span>
         <span suppressHydrationWarning>{now}</span>
       </div>
