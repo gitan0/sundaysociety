@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Menubar } from "@/components/Menubar";
 import { DesktopIcon } from "@/components/DesktopIcon";
 import { MusicWindow } from "@/components/MusicWindow";
@@ -14,6 +14,9 @@ import { Spotlight } from "./Spotlight";
 import { TerminalContent } from "./TerminalWindow";
 import { SystemWindow } from "./SystemWindow";
 import { DesktopSurface } from "./DesktopSurface";
+import { BootScreen } from "./BootScreen";
+import { LockScreen } from "./LockScreen";
+import { NotificationToast } from "./NotificationToast";
 import { CaseStudyContent } from "./CaseStudyContent";
 import {
   availability,
@@ -43,9 +46,19 @@ function UrlSync() {
 
 function DesktopInner() {
   const { openWin } = useWindows();
+  const [entering, setEntering] = useState(true);
+
+  useEffect(() => {
+    const t = setTimeout(() => setEntering(false), 1800);
+    return () => clearTimeout(t);
+  }, []);
 
   return (
-    <main className="theme-fade relative min-h-screen w-full overflow-x-hidden pt-7">
+    <main
+      className={`theme-fade relative min-h-screen w-full overflow-x-hidden pt-7 ${
+        entering ? "desktop-entering" : ""
+      }`}
+    >
       <Menubar />
       <UrlSync />
       <DesktopSurface />
@@ -64,7 +77,7 @@ function DesktopInner() {
         <div className="flex flex-col lg:flex-row gap-6 lg:gap-8 items-start justify-center w-full">
           {/* Left column: main + side projects */}
           <div className="w-full lg:w-[640px] space-y-6">
-            <ManagedWindow id="main" title="sundaysociety.xyz">
+            <ManagedWindow id="main" title="sundaysociety.xyz" enterDelay={80}>
               <div className="flex items-start gap-4">
                 <div className="relative w-16 h-16 rounded-full overflow-hidden bg-rule shrink-0 ring-1 ring-black/10">
                   <Image
@@ -124,7 +137,7 @@ function DesktopInner() {
               </div>
             </ManagedWindow>
 
-            <ManagedWindow id="projects" title="side projects — building since late 2025">
+            <ManagedWindow id="projects" title="side projects — building since late 2025" enterDelay={220}>
               <div className="divide-y divide-rule">
                 {projects.map((p) => (
                   <div key={p.name} className="py-4 first:pt-0 last:pb-0">
@@ -156,7 +169,7 @@ function DesktopInner() {
 
           {/* Right column */}
           <div className="w-full lg:w-[300px] space-y-6">
-            <ManagedWindow id="links" title="links">
+            <ManagedWindow id="links" title="links" enterDelay={340}>
               <ul className="space-y-2 font-mono text-sm">
                 {links.map((l) => (
                   <li key={l.label}>
@@ -172,11 +185,11 @@ function DesktopInner() {
               </ul>
             </ManagedWindow>
 
-            <ManagedWindow id="system" title="system" bodyClassName="p-4">
+            <ManagedWindow id="system" title="system" bodyClassName="p-4" enterDelay={440}>
               <SystemWindow />
             </ManagedWindow>
 
-            <ManagedWindow id="spotify" title="spotify">
+            <ManagedWindow id="spotify" title="spotify" enterDelay={540}>
               <MusicWindow />
             </ManagedWindow>
 
@@ -217,6 +230,9 @@ function DesktopInner() {
 
       <Dock />
       <Spotlight />
+      <NotificationToast />
+      <LockScreen />
+      <BootScreen />
     </main>
   );
 }

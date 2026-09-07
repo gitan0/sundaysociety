@@ -316,6 +316,14 @@ export function Wallpaper() {
       trail[i + 2] = 0.25 + speed * 0.75;
       trailIdx = (trailIdx + 1) % TRAIL;
     };
+    const onClick = (e: PointerEvent) => {
+      const [sx, sy] = toShader(e.clientX, e.clientY);
+      const i = trailIdx * 4;
+      trail[i] = sx;
+      trail[i + 1] = sy;
+      trail[i + 2] = 1.4;
+      trailIdx = (trailIdx + 1) % TRAIL;
+    };
     const onTime = (e: Event) => {
       overrideHour = (e as CustomEvent<{ hour: number | null }>).detail.hour;
       if (reduced) draw(0);
@@ -327,6 +335,7 @@ export function Wallpaper() {
 
     window.addEventListener("resize", onResize);
     window.addEventListener("mousemove", onMouse, { passive: true });
+    window.addEventListener("pointerdown", onClick, { passive: true });
     window.addEventListener("ss:time", onTime);
     document.addEventListener("visibilitychange", onVis);
     return () => {
@@ -334,6 +343,7 @@ export function Wallpaper() {
       running = false;
       window.removeEventListener("resize", onResize);
       window.removeEventListener("mousemove", onMouse);
+      window.removeEventListener("pointerdown", onClick);
       window.removeEventListener("ss:time", onTime);
       document.removeEventListener("visibilitychange", onVis);
       gl.getExtension("WEBGL_lose_context")?.loseContext();

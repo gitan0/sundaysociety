@@ -28,6 +28,8 @@ const HELP = [
   "  resume            open the pdf",
   "  hire              the important one",
   "  time <0-24|now>   move the sun (try `time 19.5`)",
+  "  lock              lock the screen",
+  "  reboot            replay the boot sequence",
   "  clear             clean up",
 ];
 
@@ -115,6 +117,14 @@ export function TerminalContent() {
         }
         break;
       }
+      case "lock":
+        print(["locking..."]);
+        window.dispatchEvent(new Event("ss:lock"));
+        break;
+      case "reboot":
+        print(["rebooting..."]);
+        window.dispatchEvent(new Event("ss:boot"));
+        break;
       case "pwd":
         print(["/users/luke/tulum"]);
         break;
