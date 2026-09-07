@@ -227,3 +227,77 @@ html[data-phase="dusk"] .menubar-logo {
   transform-origin: 50% 100%;
   pointer-events: none;
 }
+
+/* --- glass chrome --- */
+:root {
+  --win-bg: rgba(251, 249, 244, 0.8);
+  --titlebar-bg: rgba(243, 238, 226, 0.55);
+  --win-hairline: rgba(255, 255, 255, 0.55);
+  --win-edge: rgba(0, 0, 0, 0.22);
+  --tile-bg: rgba(255, 255, 255, 0.38);
+}
+html[data-phase="night"] {
+  --win-bg: rgba(20, 21, 28, 0.66);
+  --titlebar-bg: rgba(30, 32, 40, 0.5);
+  --win-hairline: rgba(255, 255, 255, 0.09);
+  --win-edge: rgba(0, 0, 0, 0.55);
+  --tile-bg: rgba(255, 255, 255, 0.07);
+}
+
+.glass {
+  background: var(--win-bg);
+  backdrop-filter: blur(22px) saturate(1.5);
+  -webkit-backdrop-filter: blur(22px) saturate(1.5);
+  box-shadow:
+    0 0 0 1px var(--win-edge),
+    inset 0 1px 0 var(--win-hairline),
+    0 24px 60px -16px rgba(0, 0, 0, 0.5);
+}
+.titlebar-glass {
+  background: var(--titlebar-bg);
+}
+.win-focus-line {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--color-accent), transparent);
+  opacity: 0.7;
+}
+
+/* springier open */
+@keyframes win-in {
+  0% {
+    opacity: 0;
+    transform: scale(0.94) translateY(10px);
+  }
+  70% {
+    opacity: 1;
+    transform: scale(1.004) translateY(-1px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+.win-enter > div {
+  animation: win-in 260ms cubic-bezier(0.2, 0.9, 0.3, 1.05);
+}
+
+/* desktop selection marquee */
+.marquee {
+  position: fixed;
+  z-index: 15;
+  border: 1px solid var(--color-accent);
+  background: color-mix(in oklab, var(--color-accent) 14%, transparent);
+  pointer-events: none;
+}
+
+/* context menu shares menu styling via .glass */
+
+.dock-tile-glass {
+  background: var(--tile-bg);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}

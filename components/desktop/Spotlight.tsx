@@ -26,6 +26,7 @@ export function Spotlight() {
       { id: "spotify", label: "spotify", keywords: "music now playing artists" },
       { id: "chess", label: "chess", keywords: "game play bot" },
       { id: "links", label: "links", keywords: "contact" },
+      { id: "system", label: "system monitor", keywords: "stats fps sun weather uptime" },
     ];
     const studies = caseStudies.map((cs) => ({
       label: `${cs.company} — ${cs.hook.toLowerCase()}`,
@@ -122,7 +123,7 @@ export function Spotlight() {
         role="dialog"
         aria-label="Spotlight search"
         onClick={(e) => e.stopPropagation()}
-        className="win-enter relative w-full max-w-[560px] rounded-xl border border-black/15 bg-cream/95 backdrop-blur-md shadow-[0_24px_70px_-12px_rgba(0,0,0,0.5)] overflow-hidden"
+        className="win-enter relative w-full max-w-[560px] rounded-xl glass overflow-hidden"
       >
         <div className="flex items-center gap-3 px-4 h-13 border-b border-black/10 py-3">
           <span className="font-mono text-ink-tertiary text-base" aria-hidden>

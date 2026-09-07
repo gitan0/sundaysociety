@@ -15,6 +15,7 @@ export type WinId =
   | "main"
   | "projects"
   | "links"
+  | "system"
   | "spotify"
   | "chess"
   | "terminal"
@@ -35,6 +36,7 @@ const ALL_IDS: WinId[] = [
   "main",
   "projects",
   "links",
+  "system",
   "spotify",
   "chess",
   "terminal",
@@ -44,7 +46,7 @@ const ALL_IDS: WinId[] = [
 ];
 
 // Windows open on first load. Chess and terminal live in the dock.
-const DEFAULT_OPEN: WinId[] = ["main", "projects", "links", "spotify"];
+const DEFAULT_OPEN: WinId[] = ["main", "projects", "links", "system", "spotify"];
 
 // Floating windows are fixed-positioned; the rest sit in the page flow.
 export const FLOATING: WinId[] = ["terminal", "pavlok", "slingshot", "magic-eden"];

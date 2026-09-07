@@ -209,7 +209,7 @@ export function Menubar() {
                 {openMenu === m.name && (
                   <div
                     role="menu"
-                    className="absolute left-0 top-full mt-1 min-w-[210px] rounded-lg border border-black/15 bg-cream/95 backdrop-blur-md shadow-[0_16px_50px_-10px_rgba(0,0,0,0.5)] py-1.5 text-ink"
+                    className="absolute left-0 top-full mt-1 min-w-[210px] rounded-lg glass py-1.5 text-ink"
                   >
                     {m.items.map((it, i) =>
                       it === "sep" ? (

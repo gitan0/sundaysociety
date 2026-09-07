@@ -12,6 +12,8 @@ import { ManagedWindow } from "./ManagedWindow";
 import { Dock } from "./Dock";
 import { Spotlight } from "./Spotlight";
 import { TerminalContent } from "./TerminalWindow";
+import { SystemWindow } from "./SystemWindow";
+import { DesktopSurface } from "./DesktopSurface";
 import { CaseStudyContent } from "./CaseStudyContent";
 import {
   availability,
@@ -46,6 +48,7 @@ function DesktopInner() {
     <main className="theme-fade relative min-h-screen w-full overflow-x-hidden pt-7">
       <Menubar />
       <UrlSync />
+      <DesktopSurface />
 
       <div className="hidden lg:flex absolute top-10 left-6 z-10 flex-col gap-4">
         <DesktopIcon
@@ -167,6 +170,10 @@ function DesktopInner() {
                   search
                 </li>
               </ul>
+            </ManagedWindow>
+
+            <ManagedWindow id="system" title="system" bodyClassName="p-4">
+              <SystemWindow />
             </ManagedWindow>
 
             <ManagedWindow id="spotify" title="spotify">

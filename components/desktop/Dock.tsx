@@ -57,16 +57,19 @@ export function Dock() {
           const inner = (
             <>
               <span
-                className={`dock-tile grid place-items-center w-10 h-10 sm:w-12 sm:h-12 rounded-xl border border-black/10 font-mono text-base sm:text-lg shadow-[0_3px_10px_rgba(0,0,0,0.18)] ${
+                className={`dock-tile grid place-items-center w-10 h-10 sm:w-12 sm:h-12 rounded-xl border font-mono text-base sm:text-lg shadow-[0_3px_10px_rgba(0,0,0,0.18)] ${
                   app.dark
-                    ? "bg-[#1a1a1c] text-[#c8f5c8]"
-                    : "bg-paper text-ink-muted"
+                    ? "bg-[#17181c] border-black/40 text-[#c8f5c8]"
+                    : "dock-tile-glass border-black/10 text-ink-muted"
                 }`}
               >
                 {app.glyph}
               </span>
-              <span className="dock-dot mt-1 block w-1 h-1 rounded-full bg-ink/60" style={{ opacity: open ? 1 : 0 }} />
-              <span className="dock-label pointer-events-none absolute -top-9 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-md border border-black/10 bg-cream/95 px-2 py-1 font-mono text-[11px] text-ink-muted opacity-0 shadow-sm transition-opacity">
+              <span
+                className="dock-dot mt-1 block h-[3px] w-4 rounded-full bg-accent"
+                style={{ opacity: open ? 0.9 : 0 }}
+              />
+              <span className="dock-label glass pointer-events-none absolute -top-9 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-md px-2 py-1 font-mono text-[11px] text-ink-muted opacity-0 transition-opacity">
                 {app.label}
               </span>
             </>

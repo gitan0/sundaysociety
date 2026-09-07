@@ -24,6 +24,7 @@ export function ManagedWindow({
 }) {
   const { wins, closeWin, minimizeWin, focusWin, moveWin, zIndexOf, focused } = useWindows();
   const ref = useRef<HTMLDivElement>(null);
+  const metaRef = useRef<HTMLSpanElement>(null);
   const drag = useRef<{ startX: number; startY: number; baseX: number; baseY: number } | null>(null);
   const st = wins[id];
   const dark = variant === "dark";
@@ -44,6 +45,7 @@ export function ManagedWindow({
   if (!st.open || st.minimized) return null;
 
   const isFocused = focused === id;
+  const idle = `[${id}]`;
 
   const onPointerDown = (e: React.PointerEvent) => {
     if (e.pointerType !== "mouse" || e.button !== 0) return;
@@ -58,12 +60,16 @@ export function ManagedWindow({
     const ny = drag.current.baseY + e.clientY - drag.current.startY;
     ref.current.style.setProperty("--wx", `${nx}px`);
     ref.current.style.setProperty("--wy", `${ny}px`);
+    if (metaRef.current) {
+      metaRef.current.textContent = `x:${Math.round(nx)} y:${Math.round(ny)}`;
+    }
   };
   const onPointerUp = (e: React.PointerEvent) => {
     if (!drag.current) return;
     const nx = drag.current.baseX + e.clientX - drag.current.startX;
     const ny = drag.current.baseY + e.clientY - drag.current.startY;
     drag.current = null;
+    if (metaRef.current) metaRef.current.textContent = idle;
     moveWin(id, nx, ny);
   };
 
@@ -90,18 +96,16 @@ export function ManagedWindow({
       aria-label={title}
     >
       <div
-        className={`bg-cream/95 backdrop-blur-sm border rounded-lg overflow-hidden flex flex-col max-h-full ${
-          isFocused
-            ? "border-black/20 shadow-[0_18px_50px_-10px_rgba(0,0,0,0.45)]"
-            : "border-black/10 shadow-[0_10px_40px_-10px_rgba(0,0,0,0.3)]"
+        className={`glass rounded-xl overflow-hidden flex flex-col max-h-full transition-opacity duration-200 ${
+          isFocused ? "" : "opacity-[0.88]"
         }`}
       >
         <div
           onPointerDown={onPointerDown}
           onPointerMove={onPointerMove}
           onPointerUp={onPointerUp}
-          className={`relative h-9 shrink-0 flex items-center px-3 border-b select-none lg:cursor-grab lg:active:cursor-grabbing ${
-            dark ? "bg-[#1a1a1c] border-black/40" : "bg-paper border-black/10"
+          className={`relative h-8 shrink-0 flex items-center px-3 border-b select-none lg:cursor-grab lg:active:cursor-grabbing ${
+            dark ? "bg-[#17171a]/90 border-black/50" : "titlebar-glass border-black/10"
           }`}
         >
           <div className="flex gap-1.5 absolute left-3 group">
@@ -126,7 +130,10 @@ export function ManagedWindow({
             <button
               type="button"
               aria-label={`Reset position of ${title}`}
-              onClick={() => moveWin(id, 0, 0)}
+              onClick={() => {
+                moveWin(id, 0, 0);
+                if (metaRef.current) metaRef.current.textContent = idle;
+              }}
               onPointerDown={(e) => e.stopPropagation()}
               className="w-3 h-3 rounded-full bg-[#28c840] border border-black/20 grid place-items-center text-[8px] leading-none text-black/0 group-hover:text-black/50 focus-visible:text-black/50"
             >
@@ -134,12 +141,22 @@ export function ManagedWindow({
             </button>
           </div>
           <div
-            className={`w-full text-center font-mono text-sm ${
-              dark ? "text-white/90" : "text-ink-tertiary"
+            className={`w-full text-center font-mono text-[10px] uppercase tracking-[0.16em] ${
+              dark ? "text-white/85" : "text-ink-tertiary"
             }`}
           >
             {title}
           </div>
+          <span
+            ref={metaRef}
+            aria-hidden
+            className={`absolute right-3 font-mono text-[9px] tracking-tight hidden lg:block ${
+              dark ? "text-white/40" : "text-ink-tertiary/70"
+            }`}
+          >
+            {idle}
+          </span>
+          {isFocused && <div className="win-focus-line" aria-hidden />}
         </div>
         <div className={`overflow-y-auto ${bodyClassName}`}>{children}</div>
       </div>

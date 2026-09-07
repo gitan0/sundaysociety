@@ -121,7 +121,7 @@ const PALETTES: Record<Phase, Palette> = {
   night: [hex("#04060d"), hex("#0b1226"), hex("#11383f"), hex("#79c7b6")],
 };
 
-function solarNow(overrideHour: number | null) {
+export function solarNow(overrideHour: number | null) {
   const now = new Date();
   const rad = Math.PI / 180;
   const start = Date.UTC(now.getUTCFullYear(), 0, 0);
@@ -176,7 +176,7 @@ function blendPalettes(elev: number, solarTime: number) {
   return { out, wNight };
 }
 
-function phaseOf(elev: number, solarTime: number): Phase {
+export function phaseOf(elev: number, solarTime: number): Phase {
   if (elev > 6) return "day";
   if (elev > -6) return solarTime < 12 ? "dawn" : "dusk";
   return "night";
