@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, type ReactNode } from "react";
+import { useRef, useState, type ReactNode } from "react";
 import { useWindows, type WinId } from "./WindowManager";
 
 export function ManagedWindow({
@@ -27,6 +27,19 @@ export function ManagedWindow({
   const drag = useRef<{ startX: number; startY: number; baseX: number; baseY: number } | null>(null);
   const st = wins[id];
   const dark = variant === "dark";
+  const [minimizing, setMinimizing] = useState(false);
+
+  const doMinimize = () => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      minimizeWin(id);
+      return;
+    }
+    setMinimizing(true);
+    setTimeout(() => {
+      setMinimizing(false);
+      minimizeWin(id);
+    }, 280);
+  };
 
   if (!st.open || st.minimized) return null;
 
@@ -63,7 +76,7 @@ export function ManagedWindow({
     <div
       ref={ref}
       onPointerDownCapture={() => focusWin(id)}
-      className={`win-enter ${positionClass} ${className}`}
+      className={`win-enter ${minimizing ? "win-minimizing" : ""} ${positionClass} ${className}`}
       style={
         {
           zIndex: zIndexOf(id),
@@ -104,7 +117,7 @@ export function ManagedWindow({
             <button
               type="button"
               aria-label={`Minimize ${title}`}
-              onClick={() => minimizeWin(id)}
+              onClick={doMinimize}
               onPointerDown={(e) => e.stopPropagation()}
               className="w-3 h-3 rounded-full bg-[#febc2e] border border-black/20 grid place-items-center text-[8px] leading-none text-black/0 group-hover:text-black/50 focus-visible:text-black/50"
             >

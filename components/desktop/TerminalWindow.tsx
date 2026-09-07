@@ -27,6 +27,7 @@ const HELP = [
   "  cat bio           the short version",
   "  resume            open the pdf",
   "  hire              the important one",
+  "  time <0-24|now>   move the sun (try `time 19.5`)",
   "  clear             clean up",
 ];
 
@@ -99,6 +100,21 @@ export function TerminalContent() {
       case "sudo":
         print(["luke is already root here. try `hire` instead."]);
         break;
+      case "time": {
+        if (arg === "now" || arg === "") {
+          window.dispatchEvent(new CustomEvent("ss:time", { detail: { hour: null } }));
+          print(["sun restored to tulum time."]);
+        } else {
+          const h = parseFloat(arg);
+          if (Number.isFinite(h) && h >= 0 && h <= 24) {
+            window.dispatchEvent(new CustomEvent("ss:time", { detail: { hour: h } }));
+            print([`sun moved to ${h}:00 solar time. \`time now\` to reset.`]);
+          } else {
+            print(["usage: time <0-24|now>"]);
+          }
+        }
+        break;
+      }
       case "pwd":
         print(["/users/luke/tulum"]);
         break;

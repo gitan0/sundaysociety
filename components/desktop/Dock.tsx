@@ -49,7 +49,7 @@ export function Dock() {
         ref={dockRef}
         onMouseMove={(e) => setMouseX(e.clientX)}
         onMouseLeave={() => setMouseX(null)}
-        className="dock pointer-events-auto flex items-end gap-1.5 sm:gap-2 px-2.5 sm:px-3 pb-1.5 pt-2 rounded-2xl border border-black/10 bg-cream/80 backdrop-blur-md shadow-[0_12px_40px_-8px_rgba(0,0,0,0.35)]"
+        className="dock pointer-events-auto flex items-end gap-1.5 sm:gap-2 px-2.5 sm:px-3 pb-1.5 pt-2 rounded-2xl border backdrop-blur-md shadow-[0_12px_40px_-8px_rgba(0,0,0,0.35)]"
       >
         {APPS.map((app, i) => {
           const open = app.id ? wins[app.id].open : false;

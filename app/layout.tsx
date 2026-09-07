@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import { Source_Serif_4, JetBrains_Mono, Inter } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
+import { Wallpaper } from "@/components/desktop/Wallpaper";
 
 const sourceSerif = Source_Serif_4({
   subsets: ["latin"],
@@ -57,17 +57,8 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${sourceSerif.variable} ${jetbrainsMono.variable} ${inter.variable}`}>
       <body>
-        {/* Wallpaper — lifted from page.tsx so 404 also gets it */}
-        <div className="fixed inset-0 -z-10">
-          <Image
-            src="/ssbg.webp"
-            alt=""
-            fill
-            priority
-            className="object-cover"
-            sizes="100vw"
-          />
-        </div>
+        {/* Dynamic wallpaper — GLSL scene driven by the real sun over Tulum */}
+        <Wallpaper />
         {children}
         <Analytics />
       </body>

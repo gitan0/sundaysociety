@@ -132,3 +132,65 @@ a, button, [role="button"], summary, [type="button"], [type="submit"], label[for
     scroll-behavior: auto !important;
   }
 }
+
+/* --- dynamic wallpaper + phase theming --- */
+
+/* CSS fallback behind the canvas (no WebGL, or before first frame) */
+.wallpaper {
+  background: linear-gradient(180deg, #6f93a8 0%, #cdd4c9 44%, #14251a 44.5%, #0a1410 100%);
+}
+html[data-phase="night"] .wallpaper {
+  background: linear-gradient(180deg, #0b0e1f 0%, #1a1f33 44%, #050a07 44.5%, #030604 100%);
+}
+
+:root {
+  --mb-bg: rgba(251, 249, 244, 0.85);
+  --mb-fg: #57503f;
+  --mb-border: rgba(0, 0, 0, 0.1);
+  --dock-bg: rgba(251, 249, 244, 0.8);
+  --dock-border: rgba(0, 0, 0, 0.1);
+}
+html[data-phase="dawn"],
+html[data-phase="dusk"] {
+  --mb-bg: rgba(38, 30, 40, 0.55);
+  --mb-fg: #ede4d3;
+  --mb-border: rgba(255, 255, 255, 0.12);
+  --dock-bg: rgba(40, 32, 42, 0.55);
+  --dock-border: rgba(255, 255, 255, 0.14);
+}
+html[data-phase="night"] {
+  --mb-bg: rgba(15, 16, 22, 0.72);
+  --mb-fg: #cfcbc0;
+  --mb-border: rgba(255, 255, 255, 0.1);
+  --dock-bg: rgba(18, 19, 26, 0.68);
+  --dock-border: rgba(255, 255, 255, 0.12);
+}
+
+.menubar {
+  background: var(--mb-bg);
+  color: var(--mb-fg);
+  border-color: var(--mb-border);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transition: background 1s ease, color 1s ease, border-color 1s ease;
+}
+html[data-phase="night"] .menubar-logo,
+html[data-phase="dawn"] .menubar-logo,
+html[data-phase="dusk"] .menubar-logo {
+  filter: invert(1) brightness(1.4);
+}
+
+.dock {
+  background: var(--dock-bg) !important;
+  border-color: var(--dock-border) !important;
+  transition: background 1s ease, border-color 1s ease;
+}
+
+/* minimize-to-dock animation */
+.win-minimizing > div {
+  transform: scale(0.4) translateY(70vh);
+  opacity: 0;
+  transition: transform 0.28s cubic-bezier(0.5, 0, 1, 0.6), opacity 0.28s ease-in;
+  transform-origin: 50% 100%;
+  pointer-events: none;
+}
