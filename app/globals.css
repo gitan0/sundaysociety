@@ -137,10 +137,43 @@ a, button, [role="button"], summary, [type="button"], [type="submit"], label[for
 
 /* CSS fallback behind the canvas (no WebGL, or before first frame) */
 .wallpaper {
-  background: linear-gradient(180deg, #6f93a8 0%, #cdd4c9 44%, #14251a 44.5%, #0a1410 100%);
+  background: linear-gradient(150deg, #0d4a63 0%, #15889f 55%, #54c8bd 100%);
+}
+html[data-phase="dawn"] .wallpaper {
+  background: linear-gradient(150deg, #131a3c 0%, #565a9e 55%, #e28a68 100%);
+}
+html[data-phase="dusk"] .wallpaper {
+  background: linear-gradient(150deg, #1c0d2e 0%, #7c2144 55%, #e2683c 100%);
 }
 html[data-phase="night"] .wallpaper {
-  background: linear-gradient(180deg, #0b0e1f 0%, #1a1f33 44%, #050a07 44.5%, #030604 100%);
+  background: linear-gradient(150deg, #04060d 0%, #0b1226 60%, #11383f 100%);
+}
+
+/* Night flips the whole surface system — every token-driven color follows. */
+html[data-phase="night"] {
+  --color-cream: #16171d;
+  --color-ink: #ece7db;
+  --color-ink-muted: #c9c3b4;
+  --color-ink-tertiary: #8b8577;
+  --color-rule: #2b2d36;
+  --color-rule-soft: #23252d;
+  --color-paper: #1e2027;
+  --color-accent: #e8a06a;
+}
+
+/* Crossfade the theme flip; keep interactive elements snappy. */
+@media (prefers-reduced-motion: no-preference) {
+  .theme-fade,
+  .theme-fade * {
+    transition:
+      background-color 0.6s ease,
+      color 0.6s ease,
+      border-color 0.6s ease;
+  }
+  .theme-fade a,
+  .theme-fade button {
+    transition-duration: 0.15s;
+  }
 }
 
 :root {
@@ -159,10 +192,10 @@ html[data-phase="dusk"] {
   --dock-border: rgba(255, 255, 255, 0.14);
 }
 html[data-phase="night"] {
-  --mb-bg: rgba(15, 16, 22, 0.72);
+  --mb-bg: rgba(10, 11, 16, 0.7);
   --mb-fg: #cfcbc0;
   --mb-border: rgba(255, 255, 255, 0.1);
-  --dock-bg: rgba(18, 19, 26, 0.68);
+  --dock-bg: rgba(14, 15, 21, 0.62);
   --dock-border: rgba(255, 255, 255, 0.12);
 }
 

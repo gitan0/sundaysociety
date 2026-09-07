@@ -43,7 +43,7 @@ function DesktopInner() {
   const { openWin } = useWindows();
 
   return (
-    <main className="relative min-h-screen w-full overflow-x-hidden pt-7">
+    <main className="theme-fade relative min-h-screen w-full overflow-x-hidden pt-7">
       <Menubar />
       <UrlSync />
 
@@ -73,7 +73,7 @@ function DesktopInner() {
                   />
                 </div>
                 <div>
-                  <h1 className="font-serif text-xl leading-tight">Luke Woodhatch</h1>
+                  <h1 className="font-serif text-2xl leading-tight">Luke Woodhatch</h1>
                   <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-ink-tertiary mt-1">
                     Tulum · US hours
                   </p>

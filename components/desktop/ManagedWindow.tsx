@@ -101,7 +101,7 @@ export function ManagedWindow({
           onPointerMove={onPointerMove}
           onPointerUp={onPointerUp}
           className={`relative h-9 shrink-0 flex items-center px-3 border-b select-none lg:cursor-grab lg:active:cursor-grabbing ${
-            dark ? "bg-[#1a1a1c] border-black/40" : "bg-[#f1ede4] border-black/10"
+            dark ? "bg-[#1a1a1c] border-black/40" : "bg-paper border-black/10"
           }`}
         >
           <div className="flex gap-1.5 absolute left-3 group">

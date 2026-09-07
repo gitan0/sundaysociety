@@ -194,3 +194,8 @@ export function useWindows() {
   if (!ctx) throw new Error("useWindows must be used inside WindowProvider");
   return ctx;
 }
+
+// Null outside a provider — for chrome shared with pages that have no desktop (404).
+export function useWindowsOptional() {
+  return useContext(WindowContext);
+}

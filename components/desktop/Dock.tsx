@@ -60,7 +60,7 @@ export function Dock() {
                 className={`dock-tile grid place-items-center w-10 h-10 sm:w-12 sm:h-12 rounded-xl border border-black/10 font-mono text-base sm:text-lg shadow-[0_3px_10px_rgba(0,0,0,0.18)] ${
                   app.dark
                     ? "bg-[#1a1a1c] text-[#c8f5c8]"
-                    : "bg-[#f3eee2] text-ink-muted"
+                    : "bg-paper text-ink-muted"
                 }`}
               >
                 {app.glyph}
