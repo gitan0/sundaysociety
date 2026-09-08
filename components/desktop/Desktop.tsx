@@ -3,7 +3,6 @@
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { Menubar } from "@/components/Menubar";
-import { DesktopIcon } from "@/components/DesktopIcon";
 import { MusicWindow } from "@/components/MusicWindow";
 import { ChessWindow } from "@/components/ChessWindow";
 import { CompanyRow } from "@/components/CompanyRow";
@@ -62,15 +61,6 @@ function DesktopInner() {
       <Menubar />
       <UrlSync />
       <DesktopSurface />
-
-      <div className="hidden lg:flex absolute top-10 left-6 z-10 flex-col gap-4">
-        <DesktopIcon
-          href="https://ats.fyi"
-          label="ats.fyi"
-          src="/assets/ats-fyi.svg"
-          alt="ats.fyi"
-        />
-      </div>
 
       {/* Window cluster */}
       <div className="relative min-h-screen flex flex-col items-center justify-center max-w-[980px] mx-auto px-4 sm:px-8 py-10 lg:py-16 pb-28 lg:pb-32">
