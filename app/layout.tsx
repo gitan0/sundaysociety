@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import { Source_Serif_4, JetBrains_Mono, Inter } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
+import { Wallpaper } from "@/components/desktop/Wallpaper";
 
 const sourceSerif = Source_Serif_4({
   subsets: ["latin"],
@@ -23,14 +23,14 @@ const inter = Inter({
 });
 
 const siteDescription =
-  "Support & community ops, crypto-native — 8+ years building 24/7 support orgs for hardware and crypto startups. Tier 3 escalations, incident response, AI-augmented workflows. Open to remote roles.";
+  "I build and run support orgs for AI and crypto companies. 8 years, solo IC to 24/7 teams, 95%+ CSAT, Tier 3 escalations and incident response. Open to remote support / CX lead roles.";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://sundaysociety.xyz"),
-  title: "Luke Woodhatch — Support & Community Ops · Crypto-native",
+  title: "Luke Woodhatch — Support & CX Lead · AI + Crypto",
   description: siteDescription,
   openGraph: {
-    title: "Luke Woodhatch — Support & Community Ops · Crypto-native",
+    title: "Luke Woodhatch — Support & CX Lead · AI + Crypto",
     description: siteDescription,
     url: "https://sundaysociety.xyz",
     siteName: "sundaysociety",
@@ -38,7 +38,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Luke Woodhatch — Support & Community Ops · Crypto-native",
+    title: "Luke Woodhatch — Support & CX Lead · AI + Crypto",
     description: siteDescription,
   },
   icons: {
@@ -57,17 +57,8 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${sourceSerif.variable} ${jetbrainsMono.variable} ${inter.variable}`}>
       <body>
-        {/* Wallpaper — lifted from page.tsx so 404 also gets it */}
-        <div className="fixed inset-0 -z-10">
-          <Image
-            src="/ssbg.webp"
-            alt=""
-            fill
-            priority
-            className="object-cover"
-            sizes="100vw"
-          />
-        </div>
+        {/* Dynamic wallpaper — GLSL scene driven by the real sun over Tulum */}
+        <Wallpaper />
         {children}
         <Analytics />
       </body>

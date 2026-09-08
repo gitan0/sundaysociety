@@ -38,7 +38,7 @@ export function MusicWindow() {
       } catch {}
     };
     load();
-    const id = setInterval(load, 60_000);
+    const id = setInterval(load, 30_000);
     return () => {
       cancelled = true;
       clearInterval(id);
@@ -50,8 +50,15 @@ export function MusicWindow() {
 
   return (
     <div className="font-mono">
-      <div className="text-[11px] uppercase tracking-[0.18em] text-ink-tertiary">
+      <div className="text-[11px] uppercase tracking-[0.18em] text-ink-tertiary flex items-center gap-2">
         {lp?.isPlaying ? "now playing" : "last played"}
+        {lp?.isPlaying && (
+          <span className="eq" aria-hidden>
+            <i />
+            <i />
+            <i />
+          </span>
+        )}
       </div>
       <a
         href={lp?.songUrl ?? "#"}

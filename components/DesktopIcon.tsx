@@ -24,6 +24,7 @@ export function DesktopIcon({
           alt={alt}
           width={128}
           height={128}
+          priority
           className="w-full h-full object-cover"
         />
       </span>
