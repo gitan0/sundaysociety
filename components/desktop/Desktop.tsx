@@ -16,6 +16,8 @@ import { DesktopSurface } from "./DesktopSurface";
 import { BootScreen } from "./BootScreen";
 import { LockScreen } from "./LockScreen";
 import { NotificationToast } from "./NotificationToast";
+import { RainFX } from "./RainFX";
+import { MeltdownFX } from "./MeltdownFX";
 import { CaseStudyContent } from "./CaseStudyContent";
 import {
   availability,
@@ -221,6 +223,8 @@ function DesktopInner() {
       <Dock />
       <Spotlight />
       <NotificationToast />
+      <RainFX />
+      <MeltdownFX />
       <LockScreen />
       <BootScreen />
     </main>

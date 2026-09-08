@@ -415,3 +415,163 @@ html[data-phase="night"] {
     animation: none;
   }
 }
+
+/* --- delight patch --- */
+
+/* terminal inverse-video selection */
+::selection {
+  background: #8ff0a4;
+  color: #0b0d10;
+}
+
+/* phosphor scrollbars */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(127, 138, 125, 0.4) transparent;
+}
+*::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+*::-webkit-scrollbar-thumb {
+  background: rgba(127, 138, 125, 0.35);
+  border-radius: 4px;
+}
+*::-webkit-scrollbar-thumb:hover {
+  background: rgba(143, 240, 164, 0.6);
+}
+
+/* blinking cursor in the main window title */
+.title-blink {
+  display: inline-block;
+  margin-left: 3px;
+  color: var(--term-green);
+  animation: blink 1.1s steps(2, start) infinite;
+}
+@keyframes blink {
+  to {
+    visibility: hidden;
+  }
+}
+
+/* rm -rf meltdown */
+@keyframes win-fall {
+  15% {
+    transform: translateY(-14px) rotate(-2deg);
+  }
+  100% {
+    transform: translateY(130vh) rotate(14deg);
+    opacity: 0;
+  }
+}
+.melting [data-win] {
+  animation: win-fall 1.1s cubic-bezier(0.45, 0, 1, 1) forwards !important;
+}
+.melting [data-win]:nth-of-type(2n) {
+  animation-duration: 1.35s !important;
+  animation-delay: 0.12s !important;
+}
+.melting [data-win]:nth-of-type(3n) {
+  animation-duration: 0.9s !important;
+  animation-delay: 0.22s !important;
+}
+.melting .dock,
+.melting .menubar {
+  transition: opacity 0.5s ease 0.8s;
+  opacity: 0;
+}
+.meltdown-black {
+  position: fixed;
+  inset: 0;
+  z-index: 95;
+  background: #000;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.45s ease;
+}
+.meltdown-black[data-on] {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* rain overlay sits above windows, under chrome */
+.rain-fx {
+  position: fixed;
+  inset: 0;
+  z-index: 45;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .title-blink {
+    animation: none;
+  }
+  .melting [data-win] {
+    animation: none !important;
+    opacity: 0;
+  }
+}
+
+/* print = clean paper resume */
+@media print {
+  :root {
+    --color-cream: #ffffff;
+    --color-ink: #111111;
+    --color-ink-muted: #333330;
+    --color-ink-tertiary: #666660;
+    --color-rule: #dddddd;
+    --color-rule-soft: #eeeeee;
+    --color-paper: #f4f4f2;
+    --color-accent: #a04a2a;
+  }
+  .wallpaper,
+  .menubar,
+  .dock,
+  .boot-screen,
+  .lock-screen,
+  .marquee,
+  .ctx-menu,
+  .rain-fx,
+  .meltdown-black,
+  [data-win-id="spotify"],
+  [data-win-id="chess"],
+  [data-win-id="system"],
+  [data-win-id="links"],
+  [data-win-id="terminal"] {
+    display: none !important;
+  }
+  main {
+    padding: 0 !important;
+  }
+  [data-win] {
+    position: static !important;
+    transform: none !important;
+    inset: auto !important;
+    width: auto !important;
+    margin: 0 0 14px !important;
+    animation: none !important;
+  }
+  .glass {
+    background: #fff !important;
+    box-shadow: none !important;
+    backdrop-filter: none !important;
+    border: 1px solid #ccc !important;
+    color: #111;
+    opacity: 1 !important;
+  }
+  .titlebar-term {
+    background: #f2f2f2 !important;
+    backdrop-filter: none !important;
+  }
+  .titlebar-term div,
+  .titlebar-term span {
+    color: #555 !important;
+  }
+  .win-focus-line,
+  .title-blink {
+    display: none !important;
+  }
+}

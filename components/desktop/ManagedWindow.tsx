@@ -137,6 +137,7 @@ export function ManagedWindow({
         } as React.CSSProperties
       }
       data-win={mode}
+      data-win-id={id}
       role={mode === "floating" ? "dialog" : undefined}
       aria-label={title}
     >
@@ -188,6 +189,11 @@ export function ManagedWindow({
             style={{ color: "var(--term-fg)" }}
           >
             {title}
+            {id === "main" && (
+              <span className="title-blink" aria-hidden>
+                ▌
+              </span>
+            )}
           </div>
           <span
             ref={metaRef}

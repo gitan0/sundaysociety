@@ -18,10 +18,40 @@ const OPENABLE: Record<string, WinId> = {
   main: "main",
 };
 
+const NEOFETCH = [
+  "      \\   |   /        luke@sundaysociety",
+  "       .-----.         ------------------",
+  "  --- (  ~/ss ) ---    os        sunday os 2.0 (tulum build)",
+  "       '-----'         host      luke woodhatch",
+  "      /   |   \\        shell     zsh · serif · silk",
+  "                       uptime    8 years in support",
+  "                       csat      95%+ held for years",
+  "                       tickets   thousands weekly, 24/7",
+  "                       stack     intercom · discord · telegram · claude",
+  "                       status    open to support / cx lead roles",
+  "                       contact   luke@sundaysociety.xyz",
+];
+
+const HISTORY = [
+  "  496  2016  cd ~/pavlok && ./build_support_team.sh --from solo --to 24/7",
+  "  497  2017  intercom automate --triggers --macros --escalation-rules",
+  "  498  2017  git init casa-selva && ./scale.sh --to sephora-mexico",
+  "  499  2019  csat --hold 95 --volume thousands-weekly",
+  "  500  2023  ssh slingshot && tail -f tier3_escalations.log",
+  "  501  2024  ./incident_response.sh --phishing --exec-compromise --calm",
+  "  502  2025  ssh magic-eden  # connection upgraded: acquired",
+  "  503  2025  ./migrate_users.sh --churn 0 --noise 0",
+  "  504  2026  mkdir ~/ats.fyi && claude code .",
+  "  505  2026  ./ship_daily.sh --with ai",
+  "  506  now   mail -s 'hello' luke@sundaysociety.xyz",
+];
+
 const HELP = [
   "available commands:",
   "  help              this",
   "  whoami            who is luke",
+  "  neofetch          system info, the pretty kind",
+  "  history           how we got here",
   "  ls                what's here",
   "  open <name>       open a window (pavlok, slingshot, magic-eden, chess...)",
   "  cat bio           the short version",
@@ -64,6 +94,23 @@ export function TerminalContent() {
       case "help":
         print(HELP);
         break;
+      case "neofetch":
+        print(NEOFETCH);
+        break;
+      case "history":
+        print(HISTORY);
+        break;
+      case "rain":
+        window.dispatchEvent(new Event("ss:rain"));
+        print(["toggling rain. (it rains here for real when it rains in tulum.)"]);
+        break;
+      case "rm":
+        if (arg.includes("-rf")) {
+          print(["rm: permission denied. try sudo. (don't try sudo.)"]);
+        } else {
+          print([`rm: ${arg || "?"}: no such file`]);
+        }
+        break;
       case "whoami":
         print(["luke woodhatch", headline.toLowerCase(), "tulum · us hours · open to work"]);
         break;
@@ -100,7 +147,17 @@ export function TerminalContent() {
           "mailto:luke@sundaysociety.xyz?subject=saw%20the%20terminal";
         break;
       case "sudo":
-        print(["luke is already root here. try `hire` instead."]);
+        if (arg.includes("rm") && arg.includes("-rf")) {
+          print([
+            "removing /windows ...",
+            "removing /users/luke ...",
+            "critical: hiring_daemon killed",
+            "no. NO. wait —",
+          ]);
+          setTimeout(() => window.dispatchEvent(new Event("ss:meltdown")), 700);
+        } else {
+          print(["luke is already root here. try `hire` instead."]);
+        }
         break;
       case "time": {
         if (arg === "now" || arg === "") {

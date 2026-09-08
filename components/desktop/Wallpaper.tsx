@@ -85,6 +85,25 @@ void main() {
   // soft key light, upper left
   col += u_c3 * 0.09 * exp(-length(p - vec2(-0.6, 0.42)) * 1.5);
 
+  // shooting star: one streak roughly every 40s, night only
+  float cycle = 40.0;
+  float mid = floor(u_time / cycle);
+  float mfr = fract(u_time / cycle) * cycle / 1.8; // 1.8s of life
+  if (mfr < 1.0 && u_night > 0.2) {
+    float ms1 = hash(vec2(mid, 3.1));
+    float ms2 = hash(vec2(mid, 7.7));
+    vec2 mdir = normalize(vec2(0.85, -0.3 - ms2 * 0.25));
+    vec2 mstart = vec2(-0.75 + ms1 * 0.9, 0.30 + ms2 * 0.18);
+    vec2 mpos = mstart + mdir * mfr * 1.1;
+    vec2 rel = p - mpos;
+    float along = dot(rel, -mdir);
+    float perp = abs(dot(rel, vec2(-mdir.y, mdir.x)));
+    float fade = sin(mfr * 3.14159);
+    float head = exp(-dot(rel, rel) * 4000.0);
+    float trail = exp(-perp * 260.0) * smoothstep(0.16, 0.0, clamp(along, 0.0, 1.0)) * step(0.0, along);
+    col += vec3(0.95, 0.97, 1.0) * (head + trail * 0.7) * fade * u_night;
+  }
+
   // sparse night sparkle
   vec2 sg = frag / u_res.y * 90.0;
   vec2 sid = floor(sg);
@@ -104,6 +123,59 @@ void main() {
 `;
 
 export type Phase = "dawn" | "day" | "dusk" | "night";
+
+const FAVICON_COLORS: Record<Phase, [string, string, string]> = {
+  // [top, bottom, celestial]
+  day: ["#127a92", "#35b0a4", "#f8f3d8"],
+  dawn: ["#565a9e", "#e28a68", "#ffe8c6"],
+  dusk: ["#7c2144", "#e2683c", "#ffd8a0"],
+  night: ["#0b1226", "#11383f", "#dfe8f2"],
+};
+
+function updateFavicon(phase: Phase) {
+  try {
+    const c = document.createElement("canvas");
+    c.width = 64;
+    c.height = 64;
+    const g = c.getContext("2d");
+    if (!g) return;
+    const [top, bottom, cel] = FAVICON_COLORS[phase];
+    const grad = g.createLinearGradient(0, 0, 24, 64);
+    grad.addColorStop(0, top);
+    grad.addColorStop(1, bottom);
+    g.beginPath();
+    g.roundRect(0, 0, 64, 64, 14);
+    g.fillStyle = grad;
+    g.fill();
+    g.fillStyle = cel;
+    if (phase === "night") {
+      // crescent moon
+      g.beginPath();
+      g.arc(40, 26, 11, 0, Math.PI * 2);
+      g.fill();
+      g.globalCompositeOperation = "destination-out";
+      g.beginPath();
+      g.arc(46, 22, 10, 0, Math.PI * 2);
+      g.fill();
+      g.globalCompositeOperation = "source-over";
+      g.fillStyle = cel;
+      g.fillRect(16, 44, 3, 3);
+      g.fillRect(26, 14, 2, 2);
+    } else {
+      const y = phase === "day" ? 26 : 40;
+      g.beginPath();
+      g.arc(32, y, 12, 0, Math.PI * 2);
+      g.fill();
+    }
+    const url = c.toDataURL("image/png");
+    document.querySelectorAll('link[rel="icon"]').forEach((n) => n.remove());
+    const link = document.createElement("link");
+    link.rel = "icon";
+    link.type = "image/png";
+    link.href = url;
+    document.head.appendChild(link);
+  } catch {}
+}
 
 type Palette = [number, number, number][];
 
@@ -267,6 +339,7 @@ export function Wallpaper() {
       if (phase !== lastPhase) {
         lastPhase = phase;
         document.documentElement.dataset.phase = phase;
+        updateFavicon(phase);
       }
       const { out, wNight } = blendPalettes(elev, solarTime);
 
