@@ -1,88 +1,53 @@
 "use client";
 
-import { useRef, useState } from "react";
 import { useWindows, type WinId } from "./WindowManager";
+import { DockIcon } from "./DockIcons";
 
 type DockApp = {
   id?: WinId;
   label: string;
-  glyph: string;
+  icon: string;
   href?: string;
-  dark?: boolean;
 };
 
 const APPS: DockApp[] = [
-  { id: "main", label: "sundaysociety", glyph: "ss" },
-  { id: "projects", label: "side projects", glyph: "⌂" },
-  { id: "terminal", label: "terminal", glyph: ">_", dark: true },
-  { id: "spotify", label: "spotify", glyph: "♫" },
-  { id: "chess", label: "chess", glyph: "♞" },
-  { id: "links", label: "links", glyph: "↗" },
-  { label: "email", glyph: "✉", href: "mailto:luke@sundaysociety.xyz" },
-  { label: "resume", glyph: "cv", href: "/resume.pdf" },
+  { id: "main", label: "~/main", icon: "home" },
+  { id: "projects", label: "~/side-projects", icon: "folder" },
+  { id: "terminal", label: "~/terminal", icon: "prompt" },
+  { id: "spotify", label: "~/music", icon: "music" },
+  { id: "chess", label: "~/chess", icon: "rook" },
+  { id: "links", label: "~/links", icon: "link" },
+  { label: "mailto:luke", icon: "mail", href: "mailto:luke@sundaysociety.xyz" },
+  { label: "resume.pdf", icon: "doc", href: "/resume.pdf" },
 ];
 
 export function Dock() {
   const { wins, openWin } = useWindows();
-  const dockRef = useRef<HTMLDivElement>(null);
-  const [mouseX, setMouseX] = useState<number | null>(null);
-  const itemRefs = useRef<(HTMLDivElement | null)[]>([]);
-
-  const scaleFor = (i: number) => {
-    if (mouseX === null) return 1;
-    const el = itemRefs.current[i];
-    if (!el) return 1;
-    const rect = el.getBoundingClientRect();
-    const center = rect.left + rect.width / 2;
-    const dist = Math.abs(mouseX - center);
-    const range = 96;
-    if (dist > range) return 1;
-    return 1 + 0.45 * Math.cos((dist / range) * (Math.PI / 2));
-  };
 
   return (
     <nav
       aria-label="Dock"
       className="fixed bottom-2 sm:bottom-3 inset-x-0 z-40 flex justify-center pointer-events-none"
     >
-      <div
-        ref={dockRef}
-        onMouseMove={(e) => setMouseX(e.clientX)}
-        onMouseLeave={() => setMouseX(null)}
-        className="dock pointer-events-auto flex items-end gap-1.5 sm:gap-2 px-2.5 sm:px-3 pb-1.5 pt-2 rounded-2xl border backdrop-blur-md shadow-[0_12px_40px_-8px_rgba(0,0,0,0.35)]"
-      >
-        {APPS.map((app, i) => {
+      <div className="dock pointer-events-auto flex items-end gap-1 sm:gap-1.5 px-2.5 sm:px-3 pb-1.5 pt-2 rounded-xl border backdrop-blur-md shadow-[0_12px_40px_-8px_rgba(0,0,0,0.5)]">
+        {APPS.map((app) => {
           const open = app.id ? wins[app.id].open : false;
-          const scale = scaleFor(i);
           const inner = (
             <>
-              <span
-                className={`dock-tile grid place-items-center w-10 h-10 sm:w-12 sm:h-12 rounded-xl border font-mono text-base sm:text-lg shadow-[0_3px_10px_rgba(0,0,0,0.18)] ${
-                  app.dark
-                    ? "bg-[#17181c] border-black/40 text-[#c8f5c8]"
-                    : "dock-tile-glass border-black/10 text-ink-muted"
-                }`}
-              >
-                {app.glyph}
+              <span className="dock-tile grid place-items-center w-10 h-10 sm:w-11 sm:h-11 rounded-lg border border-white/10 bg-white/[0.04] text-[#9fe8b0] shadow-[inset_0_1px_0_rgba(255,255,255,0.06)]">
+                <DockIcon name={app.icon} />
               </span>
               <span
-                className="dock-dot mt-1 block h-[3px] w-4 rounded-full bg-accent"
-                style={{ opacity: open ? 0.9 : 0 }}
+                className="dock-dot mt-1 block h-[2px] w-4 rounded-full"
+                style={{ opacity: open ? 0.95 : 0, background: "var(--term-green)" }}
               />
-              <span className="dock-label glass pointer-events-none absolute -top-9 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-md px-2 py-1 font-mono text-[11px] text-ink-muted opacity-0 transition-opacity">
-                {app.label}
+              <span className="dock-label term-panel pointer-events-none absolute -top-9 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-md px-2 py-1 font-mono text-[10px] opacity-0 transition-opacity">
+                {app.id && !open ? `open ${app.label}` : app.label}
               </span>
             </>
           );
           return (
-            <div
-              key={app.label}
-              ref={(el) => {
-                itemRefs.current[i] = el;
-              }}
-              className="dock-item relative flex flex-col items-center origin-bottom"
-              style={{ transform: `scale(${scale})`, transition: mouseX === null ? "transform 200ms ease" : "transform 60ms ease-out" }}
-            >
+            <div key={app.label} className="dock-item relative flex flex-col items-center">
               {app.href ? (
                 <a
                   href={app.href}

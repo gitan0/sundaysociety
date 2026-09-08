@@ -149,9 +149,7 @@ export function ManagedWindow({
           onPointerDown={onPointerDown}
           onPointerMove={onPointerMove}
           onPointerUp={onPointerUp}
-          className={`relative h-8 shrink-0 flex items-center px-3 border-b select-none lg:cursor-grab lg:active:cursor-grabbing ${
-            dark ? "bg-[#17171a]/90 border-black/50" : "titlebar-glass border-black/10"
-          }`}
+          className="titlebar-term relative h-8 shrink-0 flex items-center px-3 border-b border-black/50 select-none lg:cursor-grab lg:active:cursor-grabbing"
         >
           <div className="flex gap-1.5 absolute left-3 group">
             <button
@@ -186,18 +184,16 @@ export function ManagedWindow({
             </button>
           </div>
           <div
-            className={`w-full text-center font-mono text-[10px] uppercase tracking-[0.16em] ${
-              dark ? "text-white/85" : "text-ink-tertiary"
-            }`}
+            className="w-full text-center font-mono text-[10px] tracking-[0.08em]"
+            style={{ color: "var(--term-fg)" }}
           >
             {title}
           </div>
           <span
             ref={metaRef}
             aria-hidden
-            className={`absolute right-3 font-mono text-[9px] tracking-tight hidden lg:block ${
-              dark ? "text-white/40" : "text-ink-tertiary/70"
-            }`}
+            className="absolute right-3 font-mono text-[9px] tracking-tight hidden lg:block"
+            style={{ color: "var(--term-green)", opacity: 0.55 }}
           >
             {idle}
           </span>

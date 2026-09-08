@@ -77,7 +77,7 @@ function DesktopInner() {
         <div className="flex flex-col lg:flex-row gap-6 lg:gap-8 items-start justify-center w-full">
           {/* Left column: main + side projects */}
           <div className="w-full lg:w-[640px] space-y-6">
-            <ManagedWindow id="main" title="sundaysociety.xyz" enterDelay={80}>
+            <ManagedWindow id="main" title="luke@ss:~" enterDelay={80}>
               <div className="flex items-start gap-4">
                 <div className="relative w-16 h-16 rounded-full overflow-hidden bg-rule shrink-0 ring-1 ring-black/10">
                   <Image
@@ -137,7 +137,7 @@ function DesktopInner() {
               </div>
             </ManagedWindow>
 
-            <ManagedWindow id="projects" title="side projects — building since late 2025" enterDelay={220}>
+            <ManagedWindow id="projects" title="~/side-projects — building since late 2025" enterDelay={220}>
               <div className="divide-y divide-rule">
                 {projects.map((p) => (
                   <div key={p.name} className="py-4 first:pt-0 last:pb-0">
@@ -169,7 +169,7 @@ function DesktopInner() {
 
           {/* Right column */}
           <div className="w-full lg:w-[300px] space-y-6">
-            <ManagedWindow id="links" title="links" enterDelay={340}>
+            <ManagedWindow id="links" title="~/links" enterDelay={340}>
               <ul className="space-y-2 font-mono text-sm">
                 {links.map((l) => (
                   <li key={l.label}>
@@ -185,15 +185,15 @@ function DesktopInner() {
               </ul>
             </ManagedWindow>
 
-            <ManagedWindow id="system" title="system" bodyClassName="p-4" enterDelay={440}>
+            <ManagedWindow id="system" title="~/system --watch" bodyClassName="p-4" enterDelay={440}>
               <SystemWindow />
             </ManagedWindow>
 
-            <ManagedWindow id="spotify" title="spotify" enterDelay={540}>
+            <ManagedWindow id="spotify" title="~/music — spotify" enterDelay={540}>
               <MusicWindow />
             </ManagedWindow>
 
-            <ManagedWindow id="chess" title="chess">
+            <ManagedWindow id="chess" title="~/chess">
               <ChessWindow />
             </ManagedWindow>
           </div>
@@ -209,7 +209,7 @@ function DesktopInner() {
         <ManagedWindow
           key={cs.slug}
           id={cs.slug as WinId}
-          title={`${cs.slug}.md`}
+          title={`~/work/${cs.slug}.md`}
           mode="floating"
           cascade={i}
         >
@@ -219,7 +219,7 @@ function DesktopInner() {
 
       <ManagedWindow
         id="terminal"
-        title="terminal — zsh"
+        title="~/terminal — zsh"
         mode="floating"
         variant="dark"
         bodyClassName="p-0 flex-1 flex flex-col"
